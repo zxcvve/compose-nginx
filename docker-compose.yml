@@ -11,8 +11,6 @@ services:
     container_name: frontend
     ports:
       - "4314:80"
-    networks:
-      - external
 
   backend:
     build:
@@ -21,9 +19,6 @@ services:
     container_name: backend
     ports:
       - "1234:3000"
-    networks:
-      - postgres
-      - external
     restart: unless-stopped
 
   postgres:
@@ -35,10 +30,8 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres
+#    ports:
+#      - "5432:5432"
     restart: unless-stopped
 
   pgadmin:
@@ -50,19 +43,9 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin:/var/lib/pgadmin
-
     ports:
       - "${PGADMIN_PORT:-5050}:80"
-    networks:
-      - postgres
-      - external
     restart: unless-stopped
-
-
-networks:
-  postgres:
-    internal: true
-  external:
 
 volumes:
   postgres:
