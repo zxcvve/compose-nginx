@@ -4,6 +4,16 @@ const cors = require('cors')
 
 const db = require('./db')
 
+const createTableSQL = `
+  CREATE TABLE IF NOT EXISTS person
+  (
+      id SERIAL NOT NULL PRIMARY KEY,
+      name text,
+      surname text
+  );
+`;
+db.query(createTableSQL)
+
 const app = express();
 const port = 3000;
 // const port = process.env.SERVER_PORT;

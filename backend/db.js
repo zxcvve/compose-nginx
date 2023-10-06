@@ -4,7 +4,6 @@ const pgp = require('pg-promise')();
 
 
 const dbConfig = {
-  // host: 'postgres',
   host: 'postgres',
   port: '5432',
   database: 'test_db',
